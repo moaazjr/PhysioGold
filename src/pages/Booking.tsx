@@ -51,7 +51,7 @@ const SERVICES: Service[] = [
   },
   {
     id: 'sports',
-    image: '/images/SportInjuries.jpg',
+    image: '/images/dahry.jpg',
     name: 'Sports Injuries',
     nameAr: 'إصابات ملاعب',
     description: 'ACL injury, ankle injuries, shoulder joint injuries',
