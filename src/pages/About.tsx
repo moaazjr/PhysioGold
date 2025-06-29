@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Star, Award, Users } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 function About() {
-  // Using local state instead of context for this example
-  const [language, setLanguage] = useState('en');
-  
+  const { language } = useLanguage();
+
   // Helper function to translate text
   const t = (key) => {
     const translations = {
@@ -17,20 +17,13 @@ function About() {
     return translations[key] || key;
   };
 
-  const certifications = language === 'ar' ? [
+  const certifications = [
     'بكالريوس في العلاج الطبيعي - جامعة MTI',
     'شهادة الوخز الجاف',
     'إقامة العلاج الطبيعي الرياضي',
     'شهادة العلاج اليدوي',
     'شهادة فحص الحركة الوظيفية',
-    'شهادة حجامة علاجية',
-  ] : [
-    'Doctorate in Physical Therapy - MTI University',
-    'Dry Needling Certification',
-    'Sports Physical Therapy Residency',
-    'Manual Therapy Certification',
-    'Functional Movement Screen',
-    'Cupping therapy Certification',
+    'شهادة حجامة علاجية'
   ];
 
   // Background component for reuse
@@ -82,30 +75,13 @@ function About() {
 
   return (
     <DarkBackground className="min-h-screen">
-      {/* Language Toggle - Fixed Position */}
-      <div className="fixed top-6 right-6 z-50">
-        <div className="bg-black/50 backdrop-blur-sm rounded-full p-1 border border-yellow-400/20">
-          <button
-            onClick={() => setLanguage('en')}
-            className={`px-4 py-2 rounded-full transition-all duration-300 text-sm ${language === 'en'
-                ? 'bg-yellow-400 text-black font-semibold shadow-lg'
-                : 'text-yellow-400 hover:text-yellow-300'
-              }`}
-          >
-            English
-          </button>
-          <button
-            onClick={() => setLanguage('ar')}
-            className={`px-4 py-2 rounded-full transition-all duration-300 text-sm ${language === 'ar'
-                ? 'bg-yellow-400 text-black font-semibold shadow-lg'
-                : 'text-yellow-400 hover:text-yellow-300'
-              }`}
-          >
-            العربية
-          </button>
-        </div>
-      </div>
-
+      {/* Language Toggle Button */}
+      <button
+        onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+        className="fixed top-4 right-4 bg-yellow-400 text-black px-4 py-2 rounded-full hover:bg-yellow-300 transition-colors z-50"
+      >
+        {language === 'ar' ? 'English' : 'العربية'}
+      </button>
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,6 +90,11 @@ function About() {
             {/* Decorative top element */}
             <div className="flex items-center justify-center mb-8">
               <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32"></div>
+              <div className="flex items-center justify-center mb-8">
+                <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32"></div>
+                <div className="mx-6 w-3 h-3 border-2 border-yellow-400 rounded-full bg-black"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32"></div>
+              </div>
               <div className="mx-6 w-3 h-3 border-2 border-yellow-400 rounded-full bg-black"></div>
               <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent w-32"></div>
             </div>
@@ -195,7 +176,7 @@ function About() {
                   <p className="text-lg text-slate-200 mb-6 leading-relaxed">
                     {language === 'ar'
                       ? 'دكتور سهيل محمد حياته المهنية لمساعدة المرضى على التغلب على الألم واستعادة الوظائف وتحقيق أهدافهم الصحية الشخصية. يتخصص في العلاج الطبيعي العظمي والرياضي، مع تدريب متقدم في العلاج اليدوي وتحليل الحركة.'
-                      : 'With over 12 years of experience in physical therapy, Dr. Sohel Mohamed has dedicated his career to helping patients overcome pain, restore function, and achieve their personal health goals. He specializes in orthopedic and sports physical therapy, with advanced training in manual therapy and movement analysis.'
+                      : 'Dr. Sohel Mohamed has dedicated his career to helping patients overcome pain, restore function, and achieve their personal health goals. He specializes in orthopedic and sports physical therapy, with advanced training in manual therapy and movement analysis.'
                     }
                   </p>
                   <p className="text-lg text-slate-200 leading-relaxed">

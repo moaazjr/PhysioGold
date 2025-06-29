@@ -29,7 +29,7 @@ function Layout({ children }: LayoutProps) {
 
             <div className="hidden md:block">
               <div className={`ml-10 flex items-baseline space-x-8 ${language === 'ar' ? 'space-x-reverse' : ''}`}>
-                {['/', '/about', '/services', '/contact'].map((path, idx) => (
+                {['/', '/about',  '/contact'].map((path, idx) => (
                   <Link
                     key={path}
                     to={path}
@@ -38,7 +38,7 @@ function Layout({ children }: LayoutProps) {
                         : 'text-white hover:text-yellow-400'
                       }`}
                   >
-                    {t(['home', 'about', 'services', 'contact'][idx])}
+                    {t(['home', 'about', 'contact'][idx])}
                   </Link>
                 ))}
                 <button

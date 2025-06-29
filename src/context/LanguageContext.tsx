@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface LanguageContextType {
   language: 'ar' | 'en';
@@ -6,7 +6,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations = {
+export const translations = {
   ar: {
     // Navigation
     home: 'الرئيسية',
@@ -43,8 +43,9 @@ const translations = {
     obesityTreatmentDesc: 'برامج متخصصة لإدارة الوزن وتحسين اللياقة البدنية',
     
     // About
-    aboutTitle: 'عن الدكتورة سارة جونسون',
-    aboutSubtitle: 'مكرسة لمساعدة المرضى على تحقيق أعلى مستوى من الوظائف والعودة إلى الأنشطة التي يحبونها',
+    aboutTitle: 'عن الدكتور سهيل محمد',
+    aboutSubtitle: 'مكرس لمساعدة المرضى على تحقيق أعلى مستوى من الوظائف والعودة إلى الأنشطة التي يحبونها',
+    bookAppointment: 'احجز موعد',
     
     // Contact
     contactTitle: 'تواصل معنا',
@@ -133,8 +134,9 @@ const translations = {
     obesityTreatmentDesc: 'Specialized programs for weight management and fitness improvement',
     
     // About
-    aboutTitle: 'About Dr. Sarah Johnson',
+    aboutTitle: 'About Dr. Sohel Mohamed',
     aboutSubtitle: 'Dedicated to helping patients achieve their highest level of function and return to the activities they love',
+    bookAppointment: 'Book Appointment',
     
     // Contact
     contactTitle: 'Get In Touch',
