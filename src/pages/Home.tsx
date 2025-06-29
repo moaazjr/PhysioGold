@@ -1,105 +1,200 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, ArrowRight, Heart, Shield, Award } from 'lucide-react';
+import { CheckCircle, ArrowRight, Heart, Shield, Award, Play, Zap, Star } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 function Home() {
   const { t, language } = useLanguage();
 
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="min-h-screen bg-gradient-to-br from-green-600 via-green-700 to-emerald-600 flex items-center relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-green-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      {/* ----- */}
+      <section className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #FFD700 1px, transparent 0)',
+            backgroundSize: '50px 50px'
+          }}></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-500/5 to-transparent animate-pulse"></div>
         </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className={`text-white animate-fadeInLeft ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                {t('heroTitle')}
-                <span className="block text-green-200 animate-slideInRight delay-500">
-                  {t('heroSubtitle')}
-                </span>
-              </h1>
-              <p className="text-xl mb-8 text-green-100 leading-relaxed animate-fadeInUp delay-700">
-                {t('heroDescription')}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-fadeInUp delay-1000">
+
+        {/* Floating Orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-yellow-400/20 to-amber-500/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-32 right-20 w-96 h-96 bg-gradient-to-r from-amber-400/15 to-yellow-500/15 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-yellow-300/10 to-amber-400/10 rounded-full blur-2xl animate-float-slow"></div>
+        </div>
+
+        <div className="relative z-10 min-h-screen flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className="text-center space-y-12">
+
+              {/* Logo Section */}
+              <div className="animate-fadeInUp">
+                <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full mb-8 shadow-2xl relative overflow-hidden group">
+                  <img 
+                    src="/images/physioGold.jpg" 
+                    alt="Physio Gold Logo" 
+                    className="w-28 h-28 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </div>
+
+              {/* Main Heading */}
+              <div className="space-y-6 animate-fadeInUp delay-300">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">
+                  <span className="text-white">Physio</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 animate-gradient"> Gold</span>
+                </h1>
+                
+                <div className="flex items-center justify-center space-x-4">
+                  <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent flex-1 max-w-32"></div>
+                  <span className="text-gray-300 text-xl font-light tracking-wider">CLINIC</span>
+                  <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent flex-1 max-w-32"></div>
+                </div>
+
+                <p className="text-2xl md:text-3xl font-light text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-300 italic">
+                  Healthy Lifestyle
+                </p>
+              </div>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto animate-fadeInUp delay-500">
+                <div className="text-center group cursor-pointer">
+                  <div className="text-3xl md:text-4xl font-bold text-yellow-400 mb-2 group-hover:scale-110 transition-transform duration-300">500+</div>
+                  <div className="text-gray-400 text-sm uppercase tracking-wider">Happy Patients</div>
+                </div>
+                <div className="text-center group cursor-pointer">
+                  <div className="text-3xl md:text-4xl font-bold text-yellow-400 mb-2 group-hover:scale-110 transition-transform duration-300">98%</div>
+                  <div className="text-gray-400 text-sm uppercase tracking-wider">Success Rate</div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fadeInUp delay-700">
                 <Link 
                   to="/booking"
-                  className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center group"
+                  className="group relative bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-500/25 overflow-hidden"
                 >
-                  {t('bookYourSession')}
-                  <ArrowRight className={`${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform duration-300`} />
+                  <span className="relative z-10 flex items-center">
+                    <Play className="w-5 h-5 mr-3 fill-current" />
+                    {language === 'ar' ? 'احجز جلستك' : 'Book Your Session'}
+                    <ArrowRight className={`${language === 'ar' ? 'mr-3 rotate-180' : 'ml-3'} w-5 h-5 group-hover:translate-x-1 transition-transform duration-300`} />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
-                <Link 
+                
+                {/* <Link 
                   to="/services" 
-                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-600 transition-all duration-300 text-center transform hover:scale-105"
+                  className="group relative border-2 border-yellow-400/50 text-yellow-400 px-10 py-4 rounded-full font-semibold text-lg backdrop-blur-sm hover:border-yellow-400 hover:bg-yellow-400/10 transition-all duration-300 transform hover:scale-105 overflow-hidden"
                 >
-                  {t('viewServices')}
-                </Link>
+                  <span className="relative z-10 flex items-center">
+                    <Zap className="w-5 h-5 mr-3" />
+                    {language === 'ar' ? 'استكشف الخدمات' : 'Explore Services'}
+                  </span>
+                  <div className="absolute inset-0 bg-yellow-400/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </Link> */}
               </div>
+
+              {/* Trust Indicators */}
+              <div className="flex justify-center items-center space-x-8 text-gray-400 animate-fadeInUp delay-900">
+                <div className="flex items-center space-x-2">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="text-sm">5.0 Rating</span>
+                </div>
+                <div className="w-px h-6 bg-gray-600"></div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  <span className="text-sm">Licensed Clinic</span>
+                </div>
+              </div>
+
             </div>
-            
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-yellow-400/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-yellow-400/70 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center mb-16 animate-fadeInUp ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">
-              {language === 'ar' ? 'لماذا تختار فيزيوجولد؟' : 'Why Choose PhysioWell?'}
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'linear-gradient(45deg, #FFD700 25%, transparent 25%), linear-gradient(-45deg, #FFD700 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #FFD700 75%), linear-gradient(-45deg, transparent 75%, #FFD700 75%)',
+            backgroundSize: '20px 20px',
+            backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+          }}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20 animate-fadeInUp">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-yellow-100 text-yellow-800 text-sm font-medium mb-6">
+              <Award className="w-4 h-4 mr-2" />
+              {language === 'ar' ? 'لماذا نحن مختلفون' : 'Why We\'re Different'}
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              {language === 'ar' ? 'لماذا تختار فيزيوجولد؟' : 'Why Choose Physio Gold?'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
-              {language === 'ar' 
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              {language === 'ar'
                 ? 'نجمع بين الخبرة والتكنولوجيا والرعاية الشخصية لتقديم نتائج استثنائية'
-                : 'We combine expertise, technology, and personalized care to deliver exceptional results'
+                : 'We combine cutting-edge expertise, advanced technology, and personalized care to deliver exceptional results that transform lives'
               }
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp delay-200">
-              <Heart className="h-16 w-16 text-green-600 mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              <Heart className="h-16 w-16 text-yellow-500 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                 {language === 'ar' ? 'رعاية شخصية' : 'Personalized Care'}
               </h3>
-              <p className="text-gray-600">
-                {language === 'ar' 
+              <p className="text-gray-600 text-center leading-relaxed">
+                {language === 'ar'
                   ? 'كل خطة علاج مصممة خصيصاً لاحتياجاتك وأهدافك المحددة للحصول على أفضل تعافي.'
-                  : 'Every treatment plan is tailored to your specific needs and goals for optimal recovery.'
+                  : 'Every treatment plan is meticulously crafted to your unique needs, ensuring optimal recovery and long-lasting results.'
                 }
               </p>
             </div>
-            
-            <div className="text-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp delay-400">
-              <Shield className="h-16 w-16 text-green-600 mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100"></div>
+              <Shield className="h-16 w-16 text-yellow-500 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                 {language === 'ar' ? 'علاج متخصص' : 'Expert Treatment'}
               </h3>
-              <p className="text-gray-600">
-                {language === 'ar' 
+              <p className="text-gray-600 text-center leading-relaxed">
+                {language === 'ar'
                   ? 'متخصصون مرخصون مع سنوات من الخبرة في تقنيات العلاج الطبيعي المتقدمة.'
-                  : 'Licensed professionals with years of experience in advanced physical therapy techniques.'
+                  : 'Board-certified professionals with decades of experience in cutting-edge physical therapy techniques and rehabilitation.'
                 }
               </p>
             </div>
-            
-            <div className="text-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp delay-600">
-              <Award className="h-16 w-16 text-green-600 mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200"></div>
+              <Award className="h-16 w-16 text-yellow-500 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                 {language === 'ar' ? 'نتائج مثبتة' : 'Proven Results'}
               </h3>
-              <p className="text-gray-600">
-                {language === 'ar' 
+              <p className="text-gray-600 text-center leading-relaxed">
+                {language === 'ar'
                   ? 'سجل حافل من العلاجات الناجحة والمرضى الراضين الذين حققوا أهدافهم الصحية.'
-                  : 'Track record of successful treatments and satisfied patients achieving their health goals.'
+                  : 'Outstanding track record of successful treatments with 98% patient satisfaction and measurable health improvements.'
                 }
               </p>
             </div>
@@ -108,31 +203,117 @@ function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-green-600 to-emerald-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fadeInUp">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              {language === 'ar' 
+      <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-amber-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-amber-400/10 to-yellow-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="animate-fadeInUp space-y-8">
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400/20 to-amber-500/20 border border-yellow-400/30 text-yellow-400 text-sm font-medium mb-6 backdrop-blur-sm">
+              <Star className="w-4 h-4 mr-2 fill-current" />
+              {language === 'ar' ? 'ابدأ رحلتك اليوم' : 'Start Your Journey Today'}
+            </div>
+
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+              {language === 'ar'
                 ? 'مستعد لبدء رحلة التعافي؟'
-                : 'Ready to Start Your Recovery Journey?'
+                : 'Ready to Transform Your Life?'
               }
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-              {language === 'ar' 
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              {language === 'ar'
                 ? 'لا تدع الألم يعيقك. احجز استشارتك اليوم واتخذ الخطوة الأولى نحو حياة أكثر صحة وخالية من الألم.'
-                : 'Don\'t let pain hold you back. Book your consultation today and take the first step towards a healthier, pain-free life.'
+                : 'Don\'t let pain define your limits. Book your consultation today and take the first step towards a healthier, pain-free future.'
               }
             </p>
-            <Link 
+
+            <Link
               to="/booking"
-              className="inline-flex items-center bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+              className="group inline-flex items-center bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-12 py-5 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-500/25 relative overflow-hidden"
             >
-              {language === 'ar' ? 'احجز جلستك' : 'Schedule Your Session'}
-              <ArrowRight className={`${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5 group-hover:translate-x-1 transition-transform duration-300`} />
+              <span className="relative z-10 flex items-center">
+                {language === 'ar' ? 'احجز استشارتك ' : 'Book Consultation'}
+                <ArrowRight className={`${language === 'ar' ? 'mr-3 rotate-180' : 'ml-3'} w-6 h-6 group-hover:translate-x-1 transition-transform duration-300`} />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
+
+            <div className="flex justify-center items-center space-x-8 text-gray-400 pt-8">
+              <span className="flex items-center text-sm">
+                <CheckCircle className="w-4 h-4 mr-2 text-green-400" />
+                {language === 'ar' ? 'استشارة ' : ' Consultation'}
+              </span>
+              <span className="flex items-center text-sm">
+                <CheckCircle className="w-4 h-4 mr-2 text-green-400" />
+                {language === 'ar' ? 'بدون التزام' : 'No Commitment Required'}
+              </span>
+            </div>
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-3deg); }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 10s ease-in-out infinite;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 12s ease-in-out infinite;
+        }
+
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-900 { animation-delay: 0.9s; }
+      `}</style>
     </div>
   );
 }
