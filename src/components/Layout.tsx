@@ -80,7 +80,7 @@ function Layout({ children }: LayoutProps) {
         {isMenuOpen && (
           <div className="md:hidden bg-black border-t border-yellow-600 animate-slideDown">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {['/', '/about', '/services', '/contact'].map((path, idx) => (
+              {['/', '/about', '/contact'].map((path, idx) => (
                 <Link
                   key={path}
                   to={path}
@@ -90,7 +90,7 @@ function Layout({ children }: LayoutProps) {
                     }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {t(['home', 'about', 'services', 'contact'][idx])}
+                  {t(['home', 'about', 'contact'][idx])}
                 </Link>
               ))}
               <Link

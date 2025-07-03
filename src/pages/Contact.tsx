@@ -15,7 +15,7 @@ function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Contact form submitted:', formData);
-    alert(language === 'ar' 
+    alert(language === 'ar'
       ? 'شكراً لك على رسالتك! سنعود إليك قريباً.'
       : 'Thank you for your message! We will get back to you soon.'
     );
@@ -33,23 +33,23 @@ function Contact() {
     {
       icon: Phone,
       title: language === 'ar' ? 'الهاتف' : 'Phone',
-      details: '(555) 123-4567',
+      details: '01143219466',
       description: language === 'ar' ? 'اتصل بنا خلال ساعات العمل' : 'Call us during business hours'
     },
-    
+
     {
       icon: MapPin,
       title: language === 'ar' ? 'الموقع' : 'Location',
-      details: language === 'ar' ? '123 شارع الصحة' : '123 Health Street',
-      description: language === 'ar' ? 'مدينة العافية، 12345' : 'Wellness City, WC 12345'
+      details: language === 'ar' ? 'القاهرة' : 'Cairo',
+      description: language === 'ar' ? 'القاهرة' : 'Cairo'
     },
-    
+
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-green-600 via-green-700 to-emerald-600 text-white">
+      <section className="py-20 bg-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center animate-fadeInUp">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{t('contactTitle')}</h1>
@@ -61,29 +61,30 @@ function Contact() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-20 bg-gray-50">
+      <section className=" bg-gradient-to-b from-black via-gray-900 to-black py-20 text-center px-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center flex-1 gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center flex-1 gap-8 flex-wrap">
             {contactInfo.map((info, index) => (
-              <div 
+              <div
                 key={index}
-                className={`text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                className={`w-full md:w-[300px] text-center p-8 bg-black border border-yellow-500 rounded-2xl shadow-md hover:shadow-yellow-500/40 transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp ${language === 'ar' ? 'text-right' : 'text-left'}`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-                  <info.icon className="h-8 w-8 text-green-600" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500/10 rounded-full mb-6 mx-auto">
+                  <info.icon className="h-8 w-8 text-yellow-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 text-center">{info.title}</h3>
-                <p className="text-lg font-medium text-green-600 mb-2 text-center">{info.details}</p>
-                <p className="text-gray-600 text-sm text-center">{info.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{info.title}</h3>
+                <p className="text-lg font-medium text-yellow-400 mb-2">{info.details}</p>
+                <p className="text-gray-400 text-sm">{info.description}</p>
               </div>
             ))}
           </div>
+            
         </div>
       </section>
 
       {/* Contact Form & Map */}
-      
+
     </div>
   );
 }

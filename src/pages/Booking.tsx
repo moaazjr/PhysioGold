@@ -8,7 +8,6 @@ interface BookingData {
   date: string;
   time?: string;
   name: string;
-  email: string;
   phone: string;
 }
 
@@ -103,7 +102,7 @@ const ServiceCard: React.FC<{
   const description = language === 'ar' ? service.descriptionAr : service.description;
 
   return (
-    <div className="group relative bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl">
+    <div className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-900">
       {/* Gold accent bar */}
       <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-yellow-600 to-yellow-400" />
 
@@ -120,16 +119,16 @@ const ServiceCard: React.FC<{
       {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">
-          <h3 className={`text-xl font-bold text-gray-900 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <h3 className={`text-xl font-bold text-gray-900 dark:text-white ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             {serviceName}
           </h3>
-          <div className="flex items-center bg-yellow-100 px-2 py-1 rounded-full">
-            <Star className="h-4 w-4 text-yellow-600" />
-            <span className="ml-1 text-xs font-medium text-yellow-800">{service.rating}</span>
+          <div className="flex items-center bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded-full">
+            <Star className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+            <span className="ml-1 text-xs font-medium text-yellow-800 dark:text-yellow-200">{service.rating}</span>
           </div>
         </div>
 
-        <p className={`text-gray-600 text-sm mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+        <p className={`text-gray-600 dark:text-gray-300 text-sm mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           {description}
         </p>
 
@@ -137,7 +136,7 @@ const ServiceCard: React.FC<{
           onClick={() => onSelect(service.name)}
           className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 px-4 rounded-lg font-semibold 
                    hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 flex items-center justify-center
-                   group-hover:shadow-yellow-200 group-hover:shadow-md"
+                   group-hover:shadow-yellow-200 dark:group-hover:shadow-yellow-900/50 group-hover:shadow-md"
         >
           <Calendar className={language === 'ar' ? 'ml-2' : 'mr-2'} size={18} />
           {language === 'ar' ? 'احجز الآن' : 'Book Now'}
@@ -157,7 +156,7 @@ const StepIndicator: React.FC<{ currentStep: number; totalSteps: number }> = ({
         <React.Fragment key={step}>
           <div className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${currentStep >= step
             ? 'bg-yellow-600 text-white shadow-lg'
-            : 'bg-white border-2 border-gray-300 text-gray-400'
+            : 'bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-300'
             }`}>
             {currentStep > step ? (
               <CheckCircle className="h-5 w-5" />
@@ -169,7 +168,7 @@ const StepIndicator: React.FC<{ currentStep: number; totalSteps: number }> = ({
             )}
           </div>
           {step < totalSteps && (
-            <div className={`h-1 w-12 transition-all duration-300 ${currentStep > step ? 'bg-yellow-500' : 'bg-gray-200'
+            <div className={`h-1 w-12 transition-all duration-300 ${currentStep > step ? 'bg-yellow-500' : 'bg-gray-200 dark:bg-gray-600'
               }`} />
           )}
         </React.Fragment>
@@ -185,8 +184,8 @@ const BackButton: React.FC<{
 }> = ({ onClick, language, text }) => (
   <button
     onClick={onClick}
-    className="flex items-center text-yellow-600 hover:text-yellow-700 transition-colors duration-300 mb-6 
-               hover:bg-yellow-50 px-3 py-2 rounded-lg"
+    className="flex items-center text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 transition-colors duration-300 mb-6 
+               hover:bg-yellow-50 dark:hover:bg-gray-700 px-3 py-2 rounded-lg"
   >
     <ArrowLeft className={`h-5 w-5 ${language === 'ar' ? 'ml-2 rotate-180' : 'mr-2'}`} />
     {text}
@@ -206,7 +205,6 @@ const BookingSystem: React.FC = () => {
     service: '',
     date: '',
     name: '',
-    email: '',
     phone: ''
   });
   const [showSuccess, setShowSuccess] = useState(false);
@@ -218,7 +216,6 @@ const BookingSystem: React.FC = () => {
   };
 
   const addBooking = (data: BookingData) => {
-    // In a real app, you would check with your backend here
     const isAvailable = !isSlotBooked(data.date, data.time || '');
 
     if (isAvailable) {
@@ -348,7 +345,7 @@ const BookingSystem: React.FC = () => {
     setSelectedDate('');
     setSelectedTime('');
     setBookingData({
-      image: '', service: '', date: '', name: '', email: '', phone: ''
+      image: '', service: '', date: '', name: '', phone: ''
     });
     setBookingError('');
     setShowSuccess(false);
@@ -369,7 +366,7 @@ const BookingSystem: React.FC = () => {
   if (showSuccess) {
     return (
       <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-6 z-50 animate-fadeIn">
-        <div className="relative max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl animate-scaleIn">
+        <div className="relative max-w-md w-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl animate-scaleIn">
           {/* Gold header */}
           <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 py-8 px-6 text-center">
             <div className="relative inline-block">
@@ -380,22 +377,22 @@ const BookingSystem: React.FC = () => {
 
           {/* Content */}
           <div className="p-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               {t('bookingConfirmed')}
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               {t('bookingSuccess')}
             </p>
 
             {/* Booking summary */}
-            <div className="bg-gray-50 rounded-xl p-6 mb-8 text-left">
-              <h3 className="font-medium text-gray-900 mb-3">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 mb-8 text-left">
+              <h3 className="font-medium text-gray-900 dark:text-white mb-3">
                 {language === 'ar' ? 'تفاصيل الحجز' : 'Booking Details'}
               </h3>
               <div className="space-y-2 text-sm">
-                <p><span className="text-gray-500">{language === 'ar' ? 'الخدمة:' : 'Service:'}</span> {selectedService}</p>
-                <p><span className="text-gray-500">{language === 'ar' ? 'التاريخ:' : 'Date:'}</span> {new Date(selectedDate).toLocaleDateString()}</p>
-                <p><span className="text-gray-500">{language === 'ar' ? 'الوقت:' : 'Time:'}</span> {selectedTime}</p>
+                <p className="text-gray-700 dark:text-gray-300"><span className="text-gray-500 dark:text-gray-400">{language === 'ar' ? 'الخدمة:' : 'Service:'}</span> {selectedService}</p>
+                <p className="text-gray-700 dark:text-gray-300"><span className="text-gray-500 dark:text-gray-400">{language === 'ar' ? 'التاريخ:' : 'Date:'}</span> {new Date(selectedDate).toLocaleDateString()}</p>
+                <p className="text-gray-700 dark:text-gray-300"><span className="text-gray-500 dark:text-gray-400">{language === 'ar' ? 'الوقت:' : 'Time:'}</span> {selectedTime}</p>
               </div>
             </div>
 
@@ -413,26 +410,26 @@ const BookingSystem: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 dark:from-gray-900 via-gray-100 dark:via-gray-800 to-gray-200 dark:to-gray-700">
       {/* Language switcher */}
-      <div className="flex justify-end p-4">
+      {/* <div className="flex justify-end p-4">
         <button
           onClick={() => setLanguage(lang => lang === 'en' ? 'ar' : 'en')}
-          className="text-sm font-medium text-yellow-700 hover:text-yellow-800 bg-yellow-100 px-3 py-1 rounded-full"
+          className="text-sm font-medium text-yellow-700 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-300 
+                     bg-yellow-100 dark:bg-yellow-900/30 px-3 py-1 rounded-full"
         >
           {language === 'en' ? 'العربية' : 'English'}
         </button>
-      </div>
+      </div> */}
 
       {/* Header */}
       <div>
-
         {/* Logo and title */}
-        <div className="relative mx-auto text-center"> {/* Remove max-width constraint */}
+        <div className="relative mx-auto text-center">
           <img
             src="images/bookingBG2.jpg"
             alt="Physio Gold Logo"
-            className="block max-w-full mx-auto" // Natural size with responsive max-width
+            className="block w-full mx-auto"
           />
 
           <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -441,21 +438,17 @@ const BookingSystem: React.FC = () => {
             </div>
           </div>
         </div>
-
-
-        {/* Wave divider */}
-        {/* <div className="absolute bottom-0 left-0 right-0 h-12 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDEyMCI+PHBhdGggZmlsbD0iI0Q0QUYzNyIgZD0iTTAgNjQuOUMwIDY0LjkgMzAwIDEwMCA2MDAgNjRjMzAwLTM2IDYwMC02NCA2MDAtNjR2NjRIMHoiLz48L3N2Zz4=')] bg-repeat-x opacity-30" /> */}
       </div>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-12">
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden border border-gray-100 dark:border-gray-700">
           {/* Error Message */}
           {bookingError && (
-            <div className="bg-red-50 border-l-4 border-red-500 p-6 m-6 rounded-xl animate-shake">
+            <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-6 m-6 rounded-xl animate-shake">
               <div className="flex items-center">
-                <AlertCircle className="h-6 w-6 text-red-500 mr-3 flex-shrink-0" />
-                <p className="text-red-700 font-medium">{bookingError}</p>
+                <AlertCircle className="h-6 w-6 text-red-500 dark:text-red-400 mr-3 flex-shrink-0" />
+                <p className="text-red-700 dark:text-red-300 font-medium">{bookingError}</p>
               </div>
             </div>
           )}
@@ -464,7 +457,7 @@ const BookingSystem: React.FC = () => {
             {/* Step 1: Service Selection */}
             {bookingStep === 1 && (
               <div className="animate-fadeInUp">
-                <h2 className={`text-3xl font-bold text-gray-900 mb-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                <h2 className={`text-3xl font-bold text-gray-900 dark:text-white mb-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                   {t('selectService')}
                 </h2>
 
@@ -491,11 +484,11 @@ const BookingSystem: React.FC = () => {
                   text={t('back')}
                 />
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('selectDate')}</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">{t('selectDate')}</h2>
 
                 {/* Selected Service Summary */}
-                <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl border border-yellow-200">
-                  <p className={`text-yellow-800 text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 dark:from-yellow-900/20 to-yellow-100 dark:to-yellow-900/30 rounded-2xl border border-yellow-200 dark:border-yellow-800">
+                  <p className={`text-yellow-800 dark:text-yellow-200 text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                     <strong>{language === 'ar' ? 'الخدمة المختارة:' : 'Selected Service:'}</strong> {selectedService}
                   </p>
                 </div>
@@ -505,13 +498,13 @@ const BookingSystem: React.FC = () => {
                     <button
                       key={date}
                       onClick={() => handleDateSelect(date)}
-                      className="p-4 border-2 border-gray-200 rounded-2xl hover:border-yellow-500 hover:bg-yellow-50 
+                      className="p-4 border-2 border-gray-200 dark:border-gray-600 rounded-2xl hover:border-yellow-500 hover:bg-yellow-50 dark:hover:bg-gray-700 
                                transition-all duration-300 text-center transform hover:scale-105 animate-fadeInUp
-                               hover:shadow-lg"
+                               hover:shadow-lg dark:hover:shadow-gray-900"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      <Calendar className="h-6 w-6 mx-auto mb-2 text-gray-600" />
-                      <p className="text-sm font-medium text-gray-900">
+                      <Calendar className="h-6 w-6 mx-auto mb-2 text-gray-600 dark:text-gray-300" />
+                      <p className="text-sm font-medium text-gray-900 dark:text-white">
                         {new Date(date).toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US', {
                           weekday: 'short',
                           month: 'short',
@@ -533,11 +526,11 @@ const BookingSystem: React.FC = () => {
                   text={t('back')}
                 />
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('selectTime')}</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">{t('selectTime')}</h2>
 
                 {/* Booking Summary */}
-                <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl border border-yellow-200">
-                  <p className={`text-yellow-800 text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                <div className="mb-8 p-6 bg-gradient-to-r from-yellow-50 dark:from-yellow-900/20 to-yellow-100 dark:to-yellow-900/30 rounded-2xl border border-yellow-200 dark:border-yellow-800">
+                  <p className={`text-yellow-800 dark:text-yellow-200 text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                     <strong>{language === 'ar' ? 'المختار:' : 'Selected:'}</strong> {selectedService} {language === 'ar' ? 'في' : 'on'} {new Date(selectedDate).toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US')}
                   </p>
                 </div>
@@ -551,17 +544,17 @@ const BookingSystem: React.FC = () => {
                         onClick={() => handleTimeSelect(time)}
                         disabled={isBooked}
                         className={`p-6 border-2 rounded-2xl transition-all duration-300 text-center transform animate-fadeInUp ${isBooked
-                          ? 'border-red-200 bg-red-50 text-red-400 cursor-not-allowed'
-                          : 'border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 hover:scale-105 hover:shadow-lg'
+                          ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 text-red-400 dark:text-red-500 cursor-not-allowed'
+                          : 'border-gray-200 dark:border-gray-600 hover:border-yellow-500 hover:bg-yellow-50 dark:hover:bg-gray-700 hover:scale-105 hover:shadow-lg dark:hover:shadow-gray-900'
                           }`}
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
-                        <Clock className={`h-6 w-6 mx-auto mb-2 ${isBooked ? 'text-red-400' : 'text-gray-600'}`} />
-                        <p className={`text-lg font-medium ${isBooked ? 'text-red-400' : 'text-gray-900'}`}>
+                        <Clock className={`h-6 w-6 mx-auto mb-2 ${isBooked ? 'text-red-400 dark:text-red-500' : 'text-gray-600 dark:text-gray-300'}`} />
+                        <p className={`text-lg font-medium ${isBooked ? 'text-red-400 dark:text-red-500' : 'text-gray-900 dark:text-white'}`}>
                           {time}
                         </p>
                         {isBooked && (
-                          <p className="text-sm text-red-500 mt-2 font-medium">
+                          <p className="text-sm text-red-500 dark:text-red-400 mt-2 font-medium">
                             {language === 'ar' ? 'محجوز' : 'Booked'}
                           </p>
                         )}
@@ -581,27 +574,27 @@ const BookingSystem: React.FC = () => {
                   text={t('back')}
                 />
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('yourInfo')}</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">{t('yourInfo')}</h2>
 
                 {/* Comprehensive Booking Summary */}
-                <div className="mb-8 p-8 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-3xl border border-yellow-200 shadow-inner">
-                  <h3 className={`text-xl font-bold text-gray-900 mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                <div className="mb-8 p-8 bg-gradient-to-r from-yellow-50 dark:from-yellow-900/20 to-yellow-100 dark:to-yellow-900/30 rounded-3xl border border-yellow-200 dark:border-yellow-800 shadow-inner">
+                  <h3 className={`text-xl font-bold text-gray-900 dark:text-white mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                     {language === 'ar' ? 'ملخص الحجز' : 'Booking Summary'}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <p className="text-gray-600 text-sm font-medium mb-1">{language === 'ar' ? 'الخدمة' : 'Service'}</p>
-                      <p className="font-bold text-gray-900 text-lg">{selectedService}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">{language === 'ar' ? 'الخدمة' : 'Service'}</p>
+                      <p className="font-bold text-gray-900 dark:text-white text-lg">{selectedService}</p>
                     </div>
                     <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <p className="text-gray-600 text-sm font-medium mb-1">{language === 'ar' ? 'التاريخ' : 'Date'}</p>
-                      <p className="font-bold text-gray-900 text-lg">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">{language === 'ar' ? 'التاريخ' : 'Date'}</p>
+                      <p className="font-bold text-gray-900 dark:text-white text-lg">
                         {new Date(selectedDate).toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US')}
                       </p>
                     </div>
                     <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <p className="text-gray-600 text-sm font-medium mb-1">{language === 'ar' ? 'الوقت' : 'Time'}</p>
-                      <p className="font-bold text-gray-900 text-lg">{selectedTime}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">{language === 'ar' ? 'الوقت' : 'Time'}</p>
+                      <p className="font-bold text-gray-900 dark:text-white text-lg">{selectedTime}</p>
                     </div>
                   </div>
                 </div>
@@ -610,7 +603,7 @@ const BookingSystem: React.FC = () => {
                 <form onSubmit={handleSubmitBooking} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className={`block text-sm font-semibold text-gray-700 mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <label className={`block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                         {t('fullName')} *
                       </label>
                       <input
@@ -618,46 +611,29 @@ const BookingSystem: React.FC = () => {
                         required
                         value={bookingData.name}
                         onChange={(e) => setBookingData(prev => ({ ...prev, name: e.target.value }))}
-                        className={`w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 
-                                  focus:border-yellow-500 transition-all duration-300 text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                        className={`w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 
+                                  focus:border-yellow-500 transition-all duration-300 text-lg dark:bg-gray-700 dark:text-white ${language === 'ar' ? 'text-right' : 'text-left'}`}
                         placeholder={language === 'ar' ? 'اسمك الكامل' : 'Your full name'}
                         dir={language === 'ar' ? 'rtl' : 'ltr'}
                       />
                     </div>
 
                     <div>
-                      <label className={`block text-sm font-semibold text-gray-700 mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {t('email')} *
+                      <label className={`block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {t('phone')} *
                       </label>
                       <input
-                        type="email"
+                        type="tel"
                         required
-                        value={bookingData.email}
-                        onChange={(e) => setBookingData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 
-                                 focus:border-yellow-500 transition-all duration-300 text-lg"
-                        placeholder="your.email@example.com"
+                        value={bookingData.phone}
+                        onChange={(e) => setBookingData(prev => ({ ...prev, phone: e.target.value }))}
+                        className="w-full px-6 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-yellow-500 
+                               focus:border-yellow-500 transition-all duration-300 text-lg dark:bg-gray-700 dark:text-white"
+                        placeholder="(555) 123-4567"
                         dir="ltr"
                       />
                     </div>
                   </div>
-
-                  <div>
-                    <label className={`block text-sm font-semibold text-gray-700 mb-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      {t('phone')} *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={bookingData.phone}
-                      onChange={(e) => setBookingData(prev => ({ ...prev, phone: e.target.value }))}
-                      className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 
-                               focus:border-yellow-500 transition-all duration-300 text-lg"
-                      placeholder="(555) 123-4567"
-                      dir="ltr"
-                    />
-                  </div>
-
                   <button
                     type="submit"
                     className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-5 rounded-2xl 
@@ -678,4 +654,4 @@ const BookingSystem: React.FC = () => {
   );
 };
 
-export default BookingSystem; 
+export default BookingSystem;
